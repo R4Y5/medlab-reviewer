@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phlebotomy Exam Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7EFE5;
+    --purple: #674188;
+    --pink-light: #E2BFD9;
+    --purple-light: #C8A1E0;
+    --yellow-pastel: #e4de6b;
+    --navy: #0D1B2A;
+    --navy-light: #1A2E45;
+    --red: #C0392B;
+    --red-light: #E74C3C;
+    --green: #27AE60;
+    --green-light: #2ECC71;
+    --white: #F7F9FC;
+    --gray-100: #EEF2F7;
+    --gray-300: #C5CDD8;
+    --gray-500: #7F8C9A;
+    --gray-700: #3D4F61;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--purple);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--purple);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .drop-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+  }
+  .header-title { line-height: 1; }
+  .header-title h1 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .header-title span {
+    font-size: 0.72rem;
+    color: var(--gray-300);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: var(--red);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* ─── MAIN ─── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* ─── LANDING ─── */
+  #landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 12px 0;
+  }
+  .landing-hero {
+    background: var(--purple);
+    border-radius: 18px;
+    padding: 40px 32px 36px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .landing-hero h2 {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--cream);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .landing-hero h2 em {
+    color: var(--yellow-pastel);
+    font-style: normal;
+  }
+  .landing-hero p {
+    color: var(--gray-300);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+  .section-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+  .section-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 16px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--purple);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .section-card:hover { border-color: var(--purple); box-shadow: 0 4px 16px rgba(41,128,185,0.15); }
+  .section-card:hover::after { transform: scaleX(1); }
+  .section-card.selected { border-color: var(--purple); background: #EBF5FB; }
+  .section-card.selected::after { transform: scaleX(1); }
+  .card-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gray-300);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .section-card.selected .card-num { color: var(--purple); }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .card-count {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+  .start-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .q-count-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .q-count-row label {
+    font-size: 0.85rem;
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+  .q-count-row input[type=number] {
+    width: 70px;
+    padding: 6px 10px;
+    border: 2px solid var(--gray-300);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .q-count-row input[type=number]:focus { outline: none; border-color: var(--purple); }
+  .btn-start {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 14px 48px;
+    border-radius: 50px;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+  }
+  .btn-start:hover { background: var(--red-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.4); }
+  .btn-start:active { transform: translateY(0); }
+  .select-hint { font-size: 0.78rem; color: var(--gray-500); }
+
+  /* ─── QUIZ ─── */
+  #quiz { display: none; }
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .quiz-meta {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+  }
+  .quiz-progress-bar {
+    width: 100%;
+    height: 5px;
+    background: var(--gray-300);
+    border-radius: 99px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--red));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .question-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--purple);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  .question-label {
+    font-size: 0.72rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .enum-hint {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .answer-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid var(--gray-300);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--navy);
+    transition: border-color 0.2s;
+    background: var(--gray-100);
+    resize: none;
+  }
+  .answer-input:focus { outline: none; border-color: var(--purple); background: #fff; }
+
+  /* enum items */
+  .enum-items { display: flex; flex-direction: column; gap: 8px; }
+  .enum-item { display: flex; align-items: center; gap: 10px; }
+  .enum-item-num {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray-500);
+    width: 22px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .enum-item input { flex: 1; }
+
+  .quiz-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .btn { padding: 11px 28px; border-radius: 50px; border: none; cursor: pointer; font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: all 0.18s; }
+  .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 3px 12px rgba(41,128,185,0.3); }
+  .btn-primary:hover { background: var(--purple-light); transform: translateY(-1px); }
+  .btn-secondary { background: var(--gray-100); color: var(--gray-700); border: 2px solid var(--gray-300); }
+  .btn-secondary:hover { background: var(--gray-300); }
+  .btn-danger { background: var(--red); color: #fff; box-shadow: 0 3px 12px rgba(192,57,43,0.3); }
+  .btn-danger:hover { background: var(--red-light); transform: translateY(-1px); }
+  .btn-success { background: var(--green); color: #fff; box-shadow: 0 3px 12px rgba(39,174,96,0.3); }
+  .btn-success:hover { background: var(--green-light); transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+  /* ─── RESULTS ─── */
+  #results { display: none; }
+  .score-card {
+    background: var(--purple);
+    border-radius: 18px;
+    padding: 40px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-card::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(41,128,185,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .score-label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 10px;
+  }
+  .score-number {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .score-number span { color: var(--white); }
+  .score-pct {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .score-remark {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 99px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .remark-pass { background: var(--green); color: #fff; }
+  .remark-ok { background: var(--purple); color: #fff; }
+  .remark-fail { background: var(--white); color: #674188; }
+  .results-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  /* ─── REVIEW ─── */
+  #review-section { display: none; }
+  .review-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--gray-300);
+  }
+  .review-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 20px 18px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--gray-300);
+  }
+  .review-card.correct { border-left-color: var(--green); }
+  .review-card.wrong { border-left-color: var(--red); }
+  .review-q-label {
+    font-size: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .review-card.correct .review-q-label { color: var(--green); }
+  .review-card.wrong .review-q-label { color: var(--red); }
+  .review-q-text { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; line-height: 1.4; }
+  .review-answer-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 6px; }
+  .review-answer-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .dot-correct { background: var(--green); }
+  .dot-wrong { background: var(--red); }
+  .review-answer-text { font-size: 0.88rem; color: var(--gray-700); }
+  .review-answer-text strong { font-weight: 600; }
+  .tag-correct { color: var(--green); font-weight: 700; }
+  .tag-wrong { color: var(--red); font-weight: 700; }
+
+  /* enum review */
+  .enum-review-list { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .enum-review-item {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: var(--gray-100);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 0.85rem;
+  }
+  .enum-review-item.item-correct { background: #E8F8EE; }
+  .enum-review-item.item-wrong { background: #FDECEC; }
+  .enum-item-label { font-weight: 600; color: var(--gray-500); flex-shrink: 0; }
+  .enum-item-content { flex: 1; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 560px) {
+    .landing-hero h2 { font-size: 1.8rem; }
+    .landing-hero { padding: 28px 18px 26px; }
+    .score-number { font-size: 3.8rem; }
+    .quiz-actions { flex-direction: column; }
+    .quiz-actions .btn { width: 100%; text-align: center; }
+    .results-actions .btn { flex: 1 1 140px; text-align: center; }
+    .header-badge { display: none; }
+    .section-cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <!--<svg class="drop-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 4C18 4 6 16.5 6 23C6 29.627 11.373 35 18 35C24.627 35 30 29.627 30 23C30 16.5 18 4Z" fill="#C0392B"/>
+      <path d="M18 10C18 10 10 19 10 23C10 27.418 13.582 31 18 31" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg> -->
+    <div class="header-title">
+      <!--<h1>Phlebotomy Reviewer</h1>
+      <span>Board Exam Preparation</span>
+    </div>
+    <div class="header-badge">Interactive Quiz</div> -->
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════ LANDING ═══════════════ -->
+  <div id="landing">
+    <div class="landing-hero">
+      <h2>Reviewer for <em>Principle of Medical Laboratory Science 2</em></h2> <br>
+      <p>Questions are randomized and are in identification/enumeration format. Answers can be entered in any letter case.  Goodluck! :))</p>
+
+    </div>
+
+    <div class="section-cards">
+      <div class="section-card selected" data-section="0" onclick="toggleSection(this)">
+        <div class="card-num">01</div>
+        <div class="card-title">Introduction to Phlebotomy</div>
+        <div class="card-count" id="count-0"></div>
+      </div>
+      <div class="section-card selected" data-section="1" onclick="toggleSection(this)">
+        <div class="card-num">02</div>
+        <div class="card-title">Laboratory Biosafety Manual</div>
+        <div class="card-count" id="count-1"></div>
+      </div>
+      <div class="section-card selected" data-section="2" onclick="toggleSection(this)">
+        <div class="card-num">03</div>
+        <div class="card-title">Infection Control Safety</div>
+        <div class="card-count" id="count-2"></div>
+      </div>
+      <div class="section-card selected" data-section="3" onclick="toggleSection(this)">
+        <div class="card-num">04</div>
+        <div class="card-title">Test Procedures</div>
+        <div class="card-count" id="count-3"></div>
+      </div>
+    </div>
+
+    <div class="start-controls">
+      <div class="q-count-row">
+        <label for="qcount">Number of questions:</label>
+        <input type="number" id="qcount" min="5" max="60" value="20">
+        <span class="select-hint">(from selected sections)</span>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">Start Exam</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ QUIZ ═══════════════════ -->
+  <div id="quiz">
+    <div class="quiz-header">
+      <div class="quiz-meta" id="quiz-section-label">Section</div>
+      <div class="quiz-meta" id="quiz-counter">Q 0 / 0</div>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress-fill"></div></div>
+    <div id="question-container"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-secondary" onclick="prevQ()" id="btn-prev" disabled>← Back</button>
+      <button class="btn btn-primary" onclick="nextQ()" id="btn-next">Next →</button>
+      <button class="btn btn-danger" onclick="submitQuiz()" id="btn-submit" style="display:none">Submit Exam</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ RESULTS ════════════════ -->
+  <div id="results">
+    <div class="score-card">
+      <div class="score-label">Your Score</div>
+      <div class="score-number" id="score-display">0 <span>/ 0</span></div>
+      <div class="score-pct" id="score-pct" style="color:#fff"></div>
+      <div class="score-remark" id="score-remark"></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn btn-success" onclick="showReview()">Review Answers</button>
+      <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+      <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+    </div>
+    <div id="review-section">
+      <div class="review-title">Answer Review</div>
+      <div id="review-cards"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  QUESTION BANK
+// ═══════════════════════════════════════════════════════
+const SECTIONS = [
+  {
+    name: "Introduction to Phlebotomy",
+    questions: [
+      { type:"id", q:"An alternative medicine that helps ease pain inflammation", a:"cupping" },
+      { type:"id", q:"also known as 'hirudotherapy' a method that uses leeches for bloodletting and is currently used for microsurgical replanation.", a:"leeching" },
+      { type:"id", q:"Also known as 'Medicinal Leech'", a:"hirudo medicinalis" },
+      { type:"id", q:"Also known as the blood collector. An individual who performs phlebotomy.", a:"phlebotomist" },
+      { type:"id", q:"Withdrawing a venous blood sample (from a vein, not an artery) using a needle attached to an evacuated tube system or other collection devices.", a:"venipuncture" },
+      { type:"id", q:"Puncturing a finger with a specially designed safety lancet to withdraw a smaller amount of capillary blood.", a:"skin puncture" },
+      { type:"id", q:"Believed that a person's health was dependent on the balance of the four humors.", a:"hippocrates" },
+      { type:"id", q:"In one of Hippocrates' humors, Earth is linked to _______ and brain.", a:"blood" },
+      { type:"id", q:"In one of Hippocrates' humors, Air is associated with _______ and lungs.", a:"phlegm" },
+      { type:"id", q:"In one of Hippocrates' humors, Fire is connected to _______ and spleen.", a:"black bile" },
+      { type:"id", q:"In one of Hippocrates' humors, Water is associated with _______ and gall bladder.", a:"yellow bile" },
+      { type:"id", q:"According to Hippocrates, _______ must be performed to keep the balance.", a:"bloodletting" },
+      { type:"id", q:"It is the department that deals with esophagus, stomach, and intestines.", a:"gastroenterology" },
+      { type:"id", q:"Which medical department specializes in the care of the elderly population?", a:"geriatrics" },
+      { type:"id", q:"Which medical department focuses on blood?", a:"hematology" },    
+      { type:"id", q:"Medical department that deals with kidney-related conditions.", a:"nephrology" },
+      { type:"id", q:"Uses radioactive isotopes or tracers in the diagnosis and treatment.", a:"Nuclear Medicine" },
+      { type:"id", q:"Relating to the lungs", a:"pulmonary" },
+      { type:"id", q:"Uses high-energy x-rays, such as from cobalt treatment", a:"radiotherapy" },
+      { type:"id", q:"Which medical department specializes in joint and tissue diseases?", a:"rheumatology" },
+      { type:"id", q:"In medical department, it is related to sexual/reproductive system in men, and renal system for men and women.", a:"urology" },
+      { type:"id", q:"Derived from the Greek words, <b>phlebo</b>, which relates to veins, and <b>tomy</b>, which relates to cutting.", a:"phlebotomy" },
+      { type:"id", q:"A department that deals with the sexual reproductive system of females.", a:"gynecology" },
+      { type:"id", q:"Which medical department specializes in malignant tumors (cancer)?", a:"oncology" },
+      { type:"id", q:"Which medical department focuses on eyes and vision-related issues?", a:"opthalmology" },
+      { type:"id", q:"Which medical department deals with bones and joints?", a:"orthopedics" },
+      { type:"id", q:"Medical department that specializes in ears, nose, and throat (ENT).", a:"otolaryngology" },
+      { type:"id", q:"Which medical department is dedicated to the care of children?", a:"pediatrics" },
+      { type:"id", q:"Medical department that focuses on the anus and rectum.", a:"proctology" },
+      { type:"enum", q:"What are the four humors according to Hippocrates?", count:4, a:["earth","air","fire","water"] },
+    ]
+  },
+  {
+    name: "Laboratory Biosafety Manual",
+    questions: [
+      { type:"id", q:"What does BSL stand for in laboratory safety?", a:"biosafety level" },
+      { type:"id", q:"How many biosafety levels are there?", a:"four (BSL-1 to BSL-4)" },
+      { type:"id", q:"What biosafety level is required for working with agents causing serious or potentially lethal diseases with no available vaccine?", a:"BSL-4" },
+      { type:"id", q:"What is a biological safety cabinet (BSC)?", a:"a ventilated enclosure designed to protect laboratory workers, the environment, and the work from biohazardous aerosols" },
+      { type:"id", q:"What class of BSC provides personnel, product, and environmental protection using HEPA filters?", a:"Class II" },
+      { type:"id", q:"What does PPE stand for?", a:"personal protective equipment" },
+      { type:"id", q:"What does the biohazard symbol indicate?", a:"the presence of biological materials that may be hazardous to humans or the environment" },
+      { type:"id", q:"What is the purpose of an autoclave in a laboratory?", a:"to sterilize equipment and waste using high-pressure steam" },
+      { type:"id", q:"What color are biohazardous waste bags typically?", a:"red or orange-red" },
+      { type:"id", q:"What does SDS stand for in laboratory safety?", a:"Safety Data Sheet" },
+      { type:"id", q:"What is the minimum information found on a laboratory chemical label under GHS?", a:"product identifier, hazard pictograms, signal word, hazard statements, precautionary statements, supplier information" },
+      { type:"id", q:"What organization developed the Globally Harmonized System (GHS) of classification?", a:"United Nations" },
+      { type:"id", q:"What does OSHA stand for?", a:"Occupational Safety and Health Administration" },
+      { type:"id", q:"What is the bloodborne pathogen standard under OSHA?", a:"a regulation that protects workers from exposure to blood and other potentially infectious materials" },
+      { type:"id", q:"What does the term 'sharps' refer to in the laboratory?", a:"any object that can puncture or cut the skin, such as needles, lancets, or broken glass" },
+      { type:"id", q:"Where must sharps be disposed of?", a:"in a rigid, puncture-resistant sharps container" },
+      { type:"id", q:"What temperature does an autoclave typically reach for sterilization?", a:"121 degrees Celsius (250 degrees Fahrenheit)" },
+      { type:"id", q:"What does CEN stand for in biosafety?", a:"containment by engineering controls and natural barriers" },
+      { type:"id", q:"What does the acronym 'HEPA' mean?", a:"high-efficiency particulate air" },
+      { type:"enum", q:"Name 4 types of PPE used in phlebotomy.", count:4, a:["gloves","mask","gown","eye protection (goggles or face shield)"] },
+      { type:"enum", q:"Enumerate the 4 biosafety levels and what they represent.", count:4, a:["BSL-1: non-pathogenic microorganisms, minimal risk","BSL-2: moderate risk agents, standard precautions","BSL-3: serious or potentially lethal airborne pathogens","BSL-4: dangerous/exotic agents with no treatment"] },
+      { type:"enum", q:"List 3 engineering controls used to prevent bloodborne pathogen exposure.", count:3, a:["sharps containers","safety needles with retractable mechanism","biological safety cabinets"] },
+    ]
+  },
+  {
+    name: "Infection Control Safety",
+    questions: [
+      { type:"id", q:"What is the chain of infection?", a:"the sequence of events that leads to the spread of an infectious disease, consisting of infectious agent, reservoir, portal of exit, mode of transmission, portal of entry, and susceptible host" },
+      { type:"id", q:"What are the three modes of disease transmission?", a:"contact, droplet, and airborne" },
+      { type:"id", q:"What is Standard Precautions?", a:"a set of infection control practices applied to all patients regardless of suspected or confirmed infection status" },
+      { type:"id", q:"What is the most effective way to prevent the spread of infection?", a:"hand hygiene" },
+      { type:"id", q:"How long should you wash hands with soap and water to be effective?", a:"at least 20 seconds" },
+      { type:"id", q:"What is nosocomial infection?", a:"an infection acquired during a hospital stay (healthcare-associated infection)" },
+      { type:"id", q:"What does MRSA stand for?", a:"methicillin-resistant Staphylococcus aureus" },
+      { type:"id", q:"What isolation precaution is used for patients with airborne diseases like tuberculosis?", a:"airborne precautions" },
+      { type:"id", q:"What type of isolation requires the use of N95 respirators?", a:"airborne isolation" },
+      { type:"id", q:"What is contact precaution used for?", a:"to prevent the spread of organisms transmitted by direct or indirect contact" },
+      { type:"id", q:"What is a nosocomial pathogen?", a:"a microorganism that causes infection acquired in a healthcare setting" },
+      { type:"id", q:"What is the first step if a needlestick injury occurs?", a:"immediately wash the area with soap and water" },
+      { type:"id", q:"What is the bloodborne pathogen of greatest concern to phlebotomists?", a:"HIV, Hepatitis B, and Hepatitis C" },
+      { type:"id", q:"What is the meaning of HAI?", a:"Healthcare-Associated Infection" },
+      { type:"id", q:"What does PPE protect against in infection control?", a:"exposure to infectious materials including blood, body fluids, and pathogens" },
+      { type:"id", q:"What is droplet precaution used for?", a:"to prevent diseases spread by large respiratory droplets, such as influenza" },
+      { type:"id", q:"What is the incubation period?", a:"the time between exposure to a pathogen and the appearance of symptoms" },
+      { type:"id", q:"What does isolation mean in a healthcare setting?", a:"separating patients with contagious diseases from other patients to prevent spread" },
+      { type:"id", q:"What is a fomite?", a:"an inanimate object that can carry and transmit infectious organisms" },
+      { type:"id", q:"What does the term 'aseptic technique' mean?", a:"a set of practices designed to prevent contamination of wounds, equipment, and other surfaces by ensuring a sterile environment" },
+      { type:"enum", q:"Enumerate the 6 links in the chain of infection.", count:6, a:["infectious agent","reservoir","portal of exit","mode of transmission","portal of entry","susceptible host"] },
+      { type:"enum", q:"Name 3 types of transmission-based precautions.", count:3, a:["airborne precautions","droplet precautions","contact precautions"] },
+      { type:"enum", q:"List 4 common healthcare-associated infections (HAIs).", count:4, a:["catheter-associated urinary tract infections (CAUTI)","central line-associated bloodstream infections (CLABSI)","surgical site infections (SSI)","ventilator-associated pneumonia (VAP)"] },
+    ]
+  },
+  {
+    name: "Test Procedures",
+    questions: [
+      { type:"id", q:"What is a CBC?", a:"complete blood count" },
+      { type:"id", q:"What does a CBC measure?", a:"red blood cells, white blood cells, platelets, hemoglobin, hematocrit, and other blood components" },
+      { type:"id", q:"What tube is used for CBC?", a:"lavender/purple top (EDTA)" },
+      { type:"id", q:"What is a PT test?", a:"prothrombin time – measures the extrinsic pathway of blood coagulation" },
+      { type:"id", q:"What is aPTT?", a:"activated partial thromboplastin time – measures the intrinsic pathway of blood coagulation" },
+      { type:"id", q:"What tube is used for PT and aPTT tests?", a:"light blue top (sodium citrate)" },
+      { type:"id", q:"What is a BMP?", a:"basic metabolic panel" },
+      { type:"id", q:"What does a BMP include?", a:"glucose, BUN, creatinine, electrolytes (sodium, potassium, chloride, bicarbonate)" },
+      { type:"id", q:"What tube is typically used for chemistry tests?", a:"gold or red top (serum separator tube)" },
+      { type:"id", q:"What is the purpose of a blood glucose test?", a:"to measure the concentration of glucose in the blood to screen for or monitor diabetes" },
+      { type:"id", q:"What is HbA1c?", a:"glycated hemoglobin – reflects average blood glucose over the past 2-3 months" },
+      { type:"id", q:"What test is used to screen for syphilis?", a:"VDRL (Venereal Disease Research Laboratory) or RPR (Rapid Plasma Reagin)" },
+      { type:"id", q:"What does ESR stand for?", a:"erythrocyte sedimentation rate" },
+      { type:"id", q:"What does ESR measure?", a:"the rate at which red blood cells settle at the bottom of a tube in one hour, indicating inflammation" },
+      { type:"id", q:"What is the Westergren method?", a:"the standard method for measuring ESR using a Westergren tube" },
+      { type:"id", q:"What is a blood culture used for?", a:"to detect the presence of bacteria or fungi in the blood (bacteremia or septicemia)" },
+      { type:"id", q:"Which tube is drawn first when collecting blood cultures?", a:"blood culture bottle (aerobic first, then anaerobic)" },
+      { type:"id", q:"What is a lipid panel?", a:"a blood test measuring cholesterol and triglycerides, including total cholesterol, LDL, HDL, and triglycerides" },
+      { type:"id", q:"What preparation is required before a lipid panel?", a:"fasting for 9-12 hours before the test" },
+      { type:"id", q:"What is the normal fasting blood glucose range?", a:"70 to 99 mg/dL" },
+      { type:"id", q:"What does TSH stand for?", a:"thyroid-stimulating hormone" },
+      { type:"id", q:"What is a urinalysis?", a:"a series of tests performed on a urine sample to detect various disorders such as urinary tract infections, kidney disease, and diabetes" },
+      { type:"id", q:"What is the INR?", a:"International Normalized Ratio – a standardized measure of prothrombin time used to monitor anticoagulant therapy" },
+      { type:"enum", q:"Name 5 components measured in a Complete Blood Count (CBC).", count:5, a:["red blood cell count (RBC)","white blood cell count (WBC)","platelet count","hemoglobin (Hgb)","hematocrit (Hct)"] },
+      { type:"enum", q:"List the 4 components of a lipid panel.", count:4, a:["total cholesterol","LDL (low-density lipoprotein)","HDL (high-density lipoprotein)","triglycerides"] },
+      { type:"enum", q:"Enumerate 4 tests included in a Basic Metabolic Panel (BMP).", count:4, a:["glucose","blood urea nitrogen (BUN)","creatinine","electrolytes (sodium, potassium, chloride, bicarbonate)"] },
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+let activeQuestions = [];
+let currentIdx = 0;
+let userAnswers = [];
+let selectedSections = [0, 1, 2, 3];
+
+// populate counts
+SECTIONS.forEach((s, i) => {
+  document.getElementById('count-' + i).textContent = s.questions.length + ' questions';
+});
+
+function toggleSection(el) {
+  const idx = +el.dataset.section;
+  if (selectedSections.includes(idx)) {
+    if (selectedSections.length === 1) return; // keep at least one
+    selectedSections = selectedSections.filter(x => x !== idx);
+    el.classList.remove('selected');
+  } else {
+    selectedSections.push(idx);
+    el.classList.add('selected');
+  }
+}
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function startQuiz() {
+  let pool = [];
+  selectedSections.forEach(i => pool.push(...SECTIONS[i].questions.map(q => ({...q, section: SECTIONS[i].name}))));
+  pool = shuffle(pool);
+  const n = Math.min(+document.getElementById('qcount').value || 20, pool.length);
+  activeQuestions = pool.slice(0, n);
+  userAnswers = activeQuestions.map(q => q.type === 'enum' ? Array(q.count).fill('') : '');
+  currentIdx = 0;
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = activeQuestions[currentIdx];
+  const total = activeQuestions.length;
+  document.getElementById('quiz-section-label').textContent = q.section;
+  document.getElementById('quiz-counter').textContent = `Q ${currentIdx + 1} / ${total}`;
+  document.getElementById('progress-fill').style.width = ((currentIdx + 1) / total * 100) + '%';
+
+  let html = '';
+  if (q.type === 'id') {
+    const val = userAnswers[currentIdx] || '';
+    html = `
+      <div class="question-card">
+        <div class="question-label">Identification</div>
+        <div class="question-text">${q.q}</div>
+        <textarea class="answer-input" id="ans-input" rows="2" placeholder="Type your answer here...">${val}</textarea>
+      </div>`;
+  } else {
+    const vals = userAnswers[currentIdx] || Array(q.count).fill('');
+    let items = '';
+    for (let i = 0; i < q.count; i++) {
+      items += `<div class="enum-item"><div class="enum-item-num">${i+1}.</div>
+        <input class="answer-input" type="text" id="enum-${i}" placeholder="Item ${i+1}" value="${vals[i] || ''}"></div>`;
+    }
+    html = `
+      <div class="question-card">
+        <div class="question-label">Enumeration</div>
+        <div class="question-text">${q.q}</div>
+        <div class="enum-hint">List ${q.count} items (order does not matter)</div>
+        <div class="enum-items">${items}</div>
+      </div>`;
+  }
+  document.getElementById('question-container').innerHTML = html;
+
+  document.getElementById('btn-prev').disabled = currentIdx === 0;
+  const isLast = currentIdx === activeQuestions.length - 1;
+  document.getElementById('btn-next').style.display = isLast ? 'none' : '';
+  document.getElementById('btn-submit').style.display = isLast ? '' : 'none';
+}
+
+function saveCurrentAnswer() {
+  const q = activeQuestions[currentIdx];
+  if (q.type === 'id') {
+    const el = document.getElementById('ans-input');
+    if (el) userAnswers[currentIdx] = el.value;
+  } else {
+    const arr = [];
+    for (let i = 0; i < q.count; i++) {
+      const el = document.getElementById('enum-' + i);
+      arr.push(el ? el.value : '');
+    }
+    userAnswers[currentIdx] = arr;
+  }
+}
+
+function nextQ() {
+  saveCurrentAnswer();
+  if (currentIdx < activeQuestions.length - 1) { currentIdx++; renderQuestion(); }
+}
+function prevQ() {
+  saveCurrentAnswer();
+  if (currentIdx > 0) { currentIdx--; renderQuestion(); }
+}
+
+// ─── GRADING ───
+function normalize(str) { return str.trim().toLowerCase().replace(/\s+/g, ' '); }
+
+function gradeId(userAns, correctAns) {
+  const u = normalize(userAns);
+  const c = normalize(correctAns);
+  if (u === c) return true;
+  // partial word match: all key words present
+  const cWords = c.split(/[\s,()\/]+/).filter(w => w.length > 3);
+  return cWords.every(w => u.includes(w));
+}
+
+function gradeEnum(userArr, correctArr) {
+  const normalizedCorrect = correctArr.map(normalize);
+  let pts = 0;
+  const usedCorrect = new Set();
+  userArr.forEach(ua => {
+    const un = normalize(ua);
+    if (!un) return;
+    for (let i = 0; i < normalizedCorrect.length; i++) {
+      if (usedCorrect.has(i)) continue;
+      if (un === normalizedCorrect[i] || normalizedCorrect[i].includes(un) || un.includes(normalizedCorrect[i].split(/[\s,]+/)[0])) {
+        pts++; usedCorrect.add(i); return;
+      }
+    }
+  });
+  return { pts, total: correctArr.length };
+}
+
+function submitQuiz() {
+  saveCurrentAnswer();
+  let totalPts = 0, maxPts = 0;
+  const breakdown = [];
+  activeQuestions.forEach((q, i) => {
+    if (q.type === 'id') {
+      maxPts++;
+      const ok = gradeId(userAnswers[i] || '', q.a);
+      if (ok) totalPts++;
+      breakdown.push({ q, userAns: userAnswers[i] || '', correct: ok });
+    } else {
+      const { pts, total } = gradeEnum(userAnswers[i] || [], q.a);
+      maxPts += total;
+      totalPts += pts;
+      breakdown.push({ q, userAns: userAnswers[i] || [], pts, total, correct: pts === total });
+    }
+  });
+  showResults(totalPts, maxPts, breakdown);
+}
+
+function showResults(pts, max, breakdown) {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  const pct = Math.round(pts / max * 100);
+  document.getElementById('score-display').innerHTML = `${pts} <span>/ ${max}</span>`;
+  const pctEl = document.getElementById('score-pct');
+  pctEl.textContent = pct + '%';
+  pctEl.style.color = pct >= 75 ? '#2ECC71' : pct >= 50 ? '#F39C12' : '#E74C3C';
+  const rem = document.getElementById('score-remark');
+  if (pct >= 75) { rem.textContent = 'Excellent — You Passed!'; rem.className = 'score-remark remark-pass'; }
+  else if (pct >= 50) { rem.textContent = 'Good Effort — Keep Reviewing'; rem.className = 'score-remark remark-ok'; }
+  else { rem.textContent = 'Keep Studying — You Can Do It!'; rem.className = 'score-remark remark-fail'; }
+  window._breakdown = breakdown;
+  document.getElementById('review-section').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showReview() {
+  const sec = document.getElementById('review-section');
+  sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+  if (sec.style.display === 'none') return;
+  const bd = window._breakdown;
+  let html = '';
+  bd.forEach((item, i) => {
+    const q = item.q;
+    if (q.type === 'id') {
+      const cls = item.correct ? 'correct' : 'wrong';
+      const tag = item.correct ? '<span class="tag-correct">✓ Correct</span>' : '<span class="tag-wrong">✗ Wrong</span>';
+      html += `<div class="review-card ${cls}">
+        <div class="review-q-label">${cls === 'correct' ? '✓ Correct' : '✗ Incorrect'} · Q${i+1} · Identification</div>
+        <div class="review-q-text">${q.q}</div>
+        <div class="review-answer-row"><div class="review-answer-dot ${cls === 'correct' ? 'dot-correct' : 'dot-wrong'}"></div>
+          <div class="review-answer-text"><strong>Your answer:</strong> ${item.userAns || '<em>no answer</em>'}</div></div>
+        ${!item.correct ? `<div class="review-answer-row"><div class="review-answer-dot dot-correct"></div>
+          <div class="review-answer-text"><strong>Correct answer:</strong> ${q.a}</div></div>` : ''}
+      </div>`;
+    } else {
+      const normalizedCorrect = q.a.map(normalize);
+      const usedC = new Set();
+      let itemsHtml = '';
+      for (let j = 0; j < q.count; j++) {
+        const ua = (item.userAns[j] || '').trim();
+        const un = normalize(ua);
+        let matched = false, matchIdx = -1;
+        for (let k = 0; k < normalizedCorrect.length; k++) {
+          if (usedC.has(k)) continue;
+          if (un && (un === normalizedCorrect[k] || normalizedCorrect[k].includes(un) || un.includes(normalizedCorrect[k].split(/[\s,]+/)[0]))) {
+            matched = true; matchIdx = k; break;
+          }
+        }
+        if (matched) usedC.add(matchIdx);
+        const cls2 = ua === '' ? '' : matched ? 'item-correct' : 'item-wrong';
+        const icon = ua === '' ? '—' : matched ? '✓' : '✗';
+        itemsHtml += `<div class="enum-review-item ${cls2}">
+          <span class="enum-item-label">${j+1}. ${icon}</span>
+          <div class="enum-item-content">
+            <div>${ua || '<em>no answer</em>'}</div>
+            ${!matched && q.a[j] ? `<div style="font-size:0.8rem;color:var(--green);margin-top:3px">Expected: ${q.a[j]}</div>` : ''}
+          </div></div>`;
+      }
+      const cls = item.pts === item.total ? 'correct' : 'wrong';
+      html += `<div class="review-card ${cls}">
+        <div class="review-q-label">${item.pts === item.total ? '✓ Full Credit' : item.pts > 0 ? `~ Partial (${item.pts}/${item.total})` : '✗ Incorrect'} · Q${i+1} · Enumeration</div>
+        <div class="review-q-text">${q.q}</div>
+        <div class="enum-review-list">${itemsHtml}</div>
+      </div>`;
+    }
+  });
+  document.getElementById('review-cards').innerHTML = html;
+  document.querySelector('#review-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function retakeQuiz() {
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('review-section').style.display = 'none';
+  currentIdx = 0;
+  userAnswers = activeQuestions.map(q => q.type === 'enum' ? Array(q.count).fill('') : '');
+  activeQuestions = shuffle(activeQuestions);
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goHome() {
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('review-section').style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
