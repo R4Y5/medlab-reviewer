@@ -487,6 +487,18 @@
     color: var(--green);
   }
 
+  .question-image {
+  text-align: center;
+  margin: 15px 0;
+  }
+
+  .question-image img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 10px;
+    border: 2px solid var(--gray-300);
+  }
+
   @media (max-width: 560px) {
     .landing-hero h2 { font-size: 1.8rem; }
     .landing-hero { padding: 28px 18px 26px; }
@@ -640,6 +652,16 @@ const SECTIONS = [
       { type:"id", q:"Immunocompromised patients,newborns and infants, and the elderly.", a:"susceptible host" },
       { type:"id", q:"According to Occupational Safety and Health Administration (OSHA) Standard, it is the providing of sharp disposal containers and needles with safety devices.", a:"engineering controls" },
       { type:"id", q:"According to Occupational Safety and Health Administration (OSHA) Standard, it requires all employees to practice SP and documenting training on an annual basis.", a:"work practice protocols" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/environmental_hazard.jpg", a: "environmental hazard" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/gas_under_pressure.jpg", a: "gas under pressure" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/acutely_toxic.jpg", a: "acutely toxic" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/corrosive.jpg", a: "corrosive" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/explosive.jpg", a: "explosive" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/flammable.jpg", a: "flammable" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/health_hazard.jpg", a: "health hazard" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/moderate_hazard.jpg", a: "moderate hazard" },
+      { type:"id", q:"Identify the hazard symbol shown in the image.", image: "images/oxidising.jpg", a: "oxidising" },
+      
       { type:"id", q:"Proper hand hygiene, correct disposal of contaminated materials, and wearing personal protective equipment.", a:"standard precautions" },
       { type:"enum", q:"Name 4 types of PPE used in phlebotomy.", count:4, a:["gloves","mask","gown","eye protection (goggles or face shield)"] },
     ]
@@ -658,8 +680,6 @@ const SECTIONS = [
   {
     name: "Test Procedures",
     questions: [
-      { type:"id", q:"What is the normal fasting blood glucose range?", a:"70 to 99 mg/dL" },
-      { type:"id", q:"What does TSH stand for?", a:"thyroid-stimulating hormone" },
       { type:"id", q:"What is a urinalysis?", a:"a series of tests performed on a urine sample to detect various disorders such as urinary tract infections, kidney disease, and diabetes" },
       { type:"id", q:"What is the INR?", a:"International Normalized Ratio – a standardized measure of prothrombin time used to monitor anticoagulant therapy" },
       { type:"enum", q:"Name 5 components measured in a Complete Blood Count (CBC).", count:5, a:["red blood cell count (RBC)","white blood cell count (WBC)","platelet count","hemoglobin (Hgb)","hematocrit (Hct)"] },
@@ -725,7 +745,15 @@ function renderQuestion() {
       <div class="question-card">
         <div class="question-label">Identification</div>
         <div class="question-text">${q.q}</div>
+
+        ${q.image ? `
+          <div class="question-image">
+            <img src="${q.image}" alt="Question Image">
+          </div>
+         ` : ''}
+
         ${multiHint}
+
         <textarea class="answer-input" id="ans-input" rows="2" placeholder="Type your answer here...">${val}</textarea>
       </div>`;
   } else {
