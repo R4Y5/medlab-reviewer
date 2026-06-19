@@ -36,7 +36,6 @@
     min-height: 100vh;
   }
 
-  /* ─── HEADER ─── */
   header {
     background: var(--purple);
     padding: 0;
@@ -52,9 +51,6 @@
     display: flex;
     align-items: center;
     gap: 14px;
-  }
-  .drop-icon {
-    width: 36px; height: 36px; flex-shrink: 0;
   }
   .header-title { line-height: 1; }
   .header-title h1 {
@@ -84,14 +80,12 @@
     border-radius: 20px;
   }
 
-  /* ─── MAIN ─── */
   main {
     max-width: 900px;
     margin: 0 auto;
     padding: 28px 16px 60px;
   }
 
-  /* ─── LANDING ─── */
   #landing {
     display: flex;
     flex-direction: column;
@@ -108,7 +102,6 @@
     position: relative;
     overflow: hidden;
   }
- 
   .landing-hero h2 {
     font-family: var(--font-display);
     font-size: 2.4rem;
@@ -179,10 +172,7 @@
     line-height: 1.3;
     margin-bottom: 4px;
   }
-  .card-count {
-    font-size: 0.75rem;
-    color: var(--gray-500);
-  }
+  .card-count { font-size: 0.75rem; color: var(--gray-500); }
   .start-controls {
     display: flex;
     flex-direction: column;
@@ -197,11 +187,7 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  .q-count-row label {
-    font-size: 0.85rem;
-    color: var(--gray-700);
-    font-weight: 500;
-  }
+  .q-count-row label { font-size: 0.85rem; color: var(--gray-700); font-weight: 500; }
   .q-count-row input[type=number] {
     width: 70px;
     padding: 6px 10px;
@@ -231,7 +217,6 @@
   .btn-start:active { transform: translateY(0); }
   .select-hint { font-size: 0.78rem; color: var(--gray-500); }
 
-  /* ─── QUIZ ─── */
   #quiz { display: none; }
   .quiz-header {
     display: flex;
@@ -264,7 +249,6 @@
     transition: width 0.4s ease;
     width: 0%;
   }
-
   .question-card {
     background: #fff;
     border-radius: 16px;
@@ -308,8 +292,6 @@
     resize: none;
   }
   .answer-input:focus { outline: none; border-color: var(--purple); background: #fff; }
-
-  /* enum items */
   .enum-items { display: flex; flex-direction: column; gap: 8px; }
   .enum-item { display: flex; align-items: center; gap: 10px; }
   .enum-item-num {
@@ -322,7 +304,6 @@
     text-align: right;
   }
   .enum-item input { flex: 1; }
-
   .quiz-actions {
     display: flex;
     justify-content: space-between;
@@ -342,7 +323,6 @@
   .btn-success:hover { background: var(--green-light); transform: translateY(-1px); }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
 
-  /* ─── RESULTS ─── */
   #results { display: none; }
   .score-card {
     background: var(--purple);
@@ -405,7 +385,6 @@
     margin-bottom: 28px;
   }
 
-  /* ─── REVIEW ─── */
   #review-section { display: none; }
   .review-title {
     font-family: var(--font-display);
@@ -447,7 +426,6 @@
   .tag-correct { color: var(--green); font-weight: 700; }
   .tag-wrong { color: var(--red); font-weight: 700; }
 
-  /* enum review */
   .enum-review-list { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
   .enum-review-item {
     display: flex; gap: 8px; align-items: flex-start;
@@ -461,7 +439,54 @@
   .enum-item-label { font-weight: 600; color: var(--gray-500); flex-shrink: 0; }
   .enum-item-content { flex: 1; }
 
-  /* ─── MOBILE ─── */
+  .enum-answer-key {
+    margin-top: 14px;
+    background: #F0FAF4;
+    border: 1.5px solid #A8DFC0;
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .enum-answer-key-title {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .enum-answer-key ol {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .enum-answer-key ol li {
+    font-size: 0.85rem;
+    color: #1E6B3C;
+    line-height: 1.4;
+  }
+
+  /* Multi-answer accepted hint in review */
+  .accepted-answers-note {
+    margin-top: 8px;
+    background: #F0FAF4;
+    border: 1.5px solid #A8DFC0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: #1E6B3C;
+  }
+  .accepted-answers-note strong {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--green);
+  }
+
   @media (max-width: 560px) {
     .landing-hero h2 { font-size: 1.8rem; }
     .landing-hero { padding: 28px 18px 26px; }
@@ -478,26 +503,17 @@
 
 <header>
   <div class="header-inner">
-    <!--<svg class="drop-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 4C18 4 6 16.5 6 23C6 29.627 11.373 35 18 35C24.627 35 30 29.627 30 23C30 16.5 18 4Z" fill="#C0392B"/>
-      <path d="M18 10C18 10 10 19 10 23C10 27.418 13.582 31 18 31" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/>
-    </svg> -->
-    <div class="header-title">
-      <!--<h1>Phlebotomy Reviewer</h1>
-      <span>Board Exam Preparation</span>
-    </div>
-    <div class="header-badge">Interactive Quiz</div> -->
+    <div class="header-title"></div>
   </div>
 </header>
 
 <main>
 
-  <!-- ═══════════════════════════════════ LANDING ═══════════════ -->
+  <!-- LANDING -->
   <div id="landing">
     <div class="landing-hero">
       <h2>Reviewer for <em>Principle of Medical Laboratory Science 2</em></h2> <br>
       <p>Questions are randomized and are in identification/enumeration format. Answers can be entered in any letter case.  Goodluck! :))</p>
-
     </div>
 
     <div class="section-cards">
@@ -508,12 +524,12 @@
       </div>
       <div class="section-card selected" data-section="1" onclick="toggleSection(this)">
         <div class="card-num">02</div>
-        <div class="card-title">Laboratory Biosafety Manual</div>
+        <div class="card-title">Infection Control and Safety</div>
         <div class="card-count" id="count-1"></div>
       </div>
       <div class="section-card selected" data-section="2" onclick="toggleSection(this)">
         <div class="card-num">03</div>
-        <div class="card-title">Infection Control Safety</div>
+        <div class="card-title">None</div>
         <div class="card-count" id="count-2"></div>
       </div>
       <div class="section-card selected" data-section="3" onclick="toggleSection(this)">
@@ -533,7 +549,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════ QUIZ ═══════════════════ -->
+  <!-- QUIZ -->
   <div id="quiz">
     <div class="quiz-header">
       <div class="quiz-meta" id="quiz-section-label">Section</div>
@@ -548,7 +564,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════ RESULTS ════════════════ -->
+  <!-- RESULTS -->
   <div id="results">
     <div class="score-card">
       <div class="score-label">Your Score</div>
@@ -570,9 +586,6 @@
 </main>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  QUESTION BANK
-// ═══════════════════════════════════════════════════════
 const SECTIONS = [
   {
     name: "Introduction to Phlebotomy",
@@ -607,56 +620,34 @@ const SECTIONS = [
       { type:"id", q:"Which medical department is dedicated to the care of children?", a:"pediatrics" },
       { type:"id", q:"Medical department that focuses on the anus and rectum.", a:"proctology" },
       { type:"enum", q:"What are the four humors according to Hippocrates?", count:4, a:["earth","air","fire","water"] },
+      { type:"enum", q:"Give 5 Hematology test procedures", count:5, a:["hematocrit","hemoglobin","rbc","wbc","platelet count","differential wbc count","rbc indices","mch","mcv","mchc","rdw"] },
+      { type:"enum", q:"Give 3 Coagulation test procedures", count:3, a:["aptt","d-dimer","fsp","pt"] },
+      { type:"enum", q:"Give 5 Chemistry test procedures", count:5, a:["alanine aminotransferase test","alpha-fetoprotein","alkaline phosphate test","ammonia","electrolytes","glucose","gamma-glutamyl transferase","hemoglobin a1c","cortisol","creatine kinase","creatinine","drug analysis","lactate dehydrogenase","lipase","prostate specific antigen","total protein"] },
+      { type:"enum", q:"Give 5 Serology test procedures", count:5, a:["antinuclear antibody","antistreptolysin-o","fta-abs","rapid plasma reagin","rheumatoid factor","anti-hiv","cytomegalovirus antibody","epstein-barr virus","hepatitis b surface antigen"] },
+      { type:"enum", q:"Give 5 Clinical Microscopy Chemical Evaluation test procedures", count:5, a:["blood","bilirubin","glucose","ketones","leukocyte","ph","protein","nitrite","urobilinogen"] },
+      { type:"enum", q:"Give 3 Microbiology test procedures", count:3, a:["acid-fast bacili","blood culture","culture and sensitivity"] },
+      { type:"enum", q:"Give 3 Blood Bank test procedures", count:3, a:["Antibody screen","direct antihuman-globulin test","abo and rh type"] },
     ]
   },
   {
-    name: "Laboratory Biosafety Manual",
+    name: "Infection Control and Safety",
     questions: [
-      { type:"id", q:"What does BSL stand for in laboratory safety?", a:"biosafety level" },
-      { type:"id", q:"How many biosafety levels are there?", a:"four (BSL-1 to BSL-4)" },
-      { type:"id", q:"What biosafety level is required for working with agents causing serious or potentially lethal diseases with no available vaccine?", a:"BSL-4" },
-      { type:"id", q:"What is a biological safety cabinet (BSC)?", a:"a ventilated enclosure designed to protect laboratory workers, the environment, and the work from biohazardous aerosols" },
-      { type:"id", q:"What class of BSC provides personnel, product, and environmental protection using HEPA filters?", a:"Class II" },
-      { type:"id", q:"What does PPE stand for?", a:"personal protective equipment" },
-      { type:"id", q:"What does the biohazard symbol indicate?", a:"the presence of biological materials that may be hazardous to humans or the environment" },
-      { type:"id", q:"What is the purpose of an autoclave in a laboratory?", a:"to sterilize equipment and waste using high-pressure steam" },
-      { type:"id", q:"What color are biohazardous waste bags typically?", a:"red or orange-red" },
-      { type:"id", q:"What does SDS stand for in laboratory safety?", a:"Safety Data Sheet" },
-      { type:"id", q:"What is the minimum information found on a laboratory chemical label under GHS?", a:"product identifier, hazard pictograms, signal word, hazard statements, precautionary statements, supplier information" },
-      { type:"id", q:"What organization developed the Globally Harmonized System (GHS) of classification?", a:"United Nations" },
-      { type:"id", q:"What does OSHA stand for?", a:"Occupational Safety and Health Administration" },
-      { type:"id", q:"What is the bloodborne pathogen standard under OSHA?", a:"a regulation that protects workers from exposure to blood and other potentially infectious materials" },
-      { type:"id", q:"What does the term 'sharps' refer to in the laboratory?", a:"any object that can puncture or cut the skin, such as needles, lancets, or broken glass" },
-      { type:"id", q:"Where must sharps be disposed of?", a:"in a rigid, puncture-resistant sharps container" },
-      { type:"id", q:"What temperature does an autoclave typically reach for sterilization?", a:"121 degrees Celsius (250 degrees Fahrenheit)" },
-      { type:"id", q:"What does CEN stand for in biosafety?", a:"containment by engineering controls and natural barriers" },
-      { type:"id", q:"What does the acronym 'HEPA' mean?", a:"high-efficiency particulate air" },
+      { type:"id", q:"These microorganisms are frequently present in the specimens received in the clinical laboratory", a:"biological hazard" },
+      { type:"id", q:"These microorganisms that cause disease—examples include <br>bacteria, fungi, parasites, and viruses", a:["infectious agents","pathogen"] },
+      { type:"id", q:"It is the location of potentially harmful microorganisms, such as contaminated clinical specimen or an infected patient.", a:"reservoir" },
+      { type:"id", q:"Can be through the mucous membranes of the reservoir's nose, mouth, and eyes, as well as in blood or other body fluids.", a:["portal of entry","portal of exit"] },
+      { type:"id", q:"Can be through: direct contact, airborne, droplet, vehicle borne, vector borne", a:"means of transmission" },
+      { type:"id", q:"Immunocompromised patients,newborns and infants, and the elderly.", a:"susceptible host" },
+      { type:"id", q:"According to Occupational Safety and Health Administration (OSHA) Standard, it is the providing of sharp disposal containers and needles with safety devices.", a:"engineering controls" },
+      { type:"id", q:"According to Occupational Safety and Health Administration (OSHA) Standard, it requires all employees to practice SP and documenting training on an annual basis.", a:"work practice protocols" },
+      { type:"id", q:"Proper hand hygiene, correct disposal of contaminated materials, and wearing personal protective equipment.", a:"standard precautions" },
       { type:"enum", q:"Name 4 types of PPE used in phlebotomy.", count:4, a:["gloves","mask","gown","eye protection (goggles or face shield)"] },
-      { type:"enum", q:"Enumerate the 4 biosafety levels and what they represent.", count:4, a:["BSL-1: non-pathogenic microorganisms, minimal risk","BSL-2: moderate risk agents, standard precautions","BSL-3: serious or potentially lethal airborne pathogens","BSL-4: dangerous/exotic agents with no treatment"] },
-      { type:"enum", q:"List 3 engineering controls used to prevent bloodborne pathogen exposure.", count:3, a:["sharps containers","safety needles with retractable mechanism","biological safety cabinets"] },
     ]
   },
   {
-    name: "Infection Control Safety",
+    name: "None",
     questions: [
       { type:"id", q:"What is the chain of infection?", a:"the sequence of events that leads to the spread of an infectious disease, consisting of infectious agent, reservoir, portal of exit, mode of transmission, portal of entry, and susceptible host" },
-      { type:"id", q:"What are the three modes of disease transmission?", a:"contact, droplet, and airborne" },
-      { type:"id", q:"What is Standard Precautions?", a:"a set of infection control practices applied to all patients regardless of suspected or confirmed infection status" },
-      { type:"id", q:"What is the most effective way to prevent the spread of infection?", a:"hand hygiene" },
-      { type:"id", q:"How long should you wash hands with soap and water to be effective?", a:"at least 20 seconds" },
-      { type:"id", q:"What is nosocomial infection?", a:"an infection acquired during a hospital stay (healthcare-associated infection)" },
-      { type:"id", q:"What does MRSA stand for?", a:"methicillin-resistant Staphylococcus aureus" },
-      { type:"id", q:"What isolation precaution is used for patients with airborne diseases like tuberculosis?", a:"airborne precautions" },
-      { type:"id", q:"What type of isolation requires the use of N95 respirators?", a:"airborne isolation" },
-      { type:"id", q:"What is contact precaution used for?", a:"to prevent the spread of organisms transmitted by direct or indirect contact" },
-      { type:"id", q:"What is a nosocomial pathogen?", a:"a microorganism that causes infection acquired in a healthcare setting" },
-      { type:"id", q:"What is the first step if a needlestick injury occurs?", a:"immediately wash the area with soap and water" },
-      { type:"id", q:"What is the bloodborne pathogen of greatest concern to phlebotomists?", a:"HIV, Hepatitis B, and Hepatitis C" },
-      { type:"id", q:"What is the meaning of HAI?", a:"Healthcare-Associated Infection" },
-      { type:"id", q:"What does PPE protect against in infection control?", a:"exposure to infectious materials including blood, body fluids, and pathogens" },
-      { type:"id", q:"What is droplet precaution used for?", a:"to prevent diseases spread by large respiratory droplets, such as influenza" },
-      { type:"id", q:"What is the incubation period?", a:"the time between exposure to a pathogen and the appearance of symptoms" },
-      { type:"id", q:"What does isolation mean in a healthcare setting?", a:"separating patients with contagious diseases from other patients to prevent spread" },
       { type:"id", q:"What is a fomite?", a:"an inanimate object that can carry and transmit infectious organisms" },
       { type:"id", q:"What does the term 'aseptic technique' mean?", a:"a set of practices designed to prevent contamination of wounds, equipment, and other surfaces by ensuring a sterile environment" },
       { type:"enum", q:"Enumerate the 6 links in the chain of infection.", count:6, a:["infectious agent","reservoir","portal of exit","mode of transmission","portal of entry","susceptible host"] },
@@ -667,25 +658,6 @@ const SECTIONS = [
   {
     name: "Test Procedures",
     questions: [
-      { type:"id", q:"What is a CBC?", a:"complete blood count" },
-      { type:"id", q:"What does a CBC measure?", a:"red blood cells, white blood cells, platelets, hemoglobin, hematocrit, and other blood components" },
-      { type:"id", q:"What tube is used for CBC?", a:"lavender/purple top (EDTA)" },
-      { type:"id", q:"What is a PT test?", a:"prothrombin time – measures the extrinsic pathway of blood coagulation" },
-      { type:"id", q:"What is aPTT?", a:"activated partial thromboplastin time – measures the intrinsic pathway of blood coagulation" },
-      { type:"id", q:"What tube is used for PT and aPTT tests?", a:"light blue top (sodium citrate)" },
-      { type:"id", q:"What is a BMP?", a:"basic metabolic panel" },
-      { type:"id", q:"What does a BMP include?", a:"glucose, BUN, creatinine, electrolytes (sodium, potassium, chloride, bicarbonate)" },
-      { type:"id", q:"What tube is typically used for chemistry tests?", a:"gold or red top (serum separator tube)" },
-      { type:"id", q:"What is the purpose of a blood glucose test?", a:"to measure the concentration of glucose in the blood to screen for or monitor diabetes" },
-      { type:"id", q:"What is HbA1c?", a:"glycated hemoglobin – reflects average blood glucose over the past 2-3 months" },
-      { type:"id", q:"What test is used to screen for syphilis?", a:"VDRL (Venereal Disease Research Laboratory) or RPR (Rapid Plasma Reagin)" },
-      { type:"id", q:"What does ESR stand for?", a:"erythrocyte sedimentation rate" },
-      { type:"id", q:"What does ESR measure?", a:"the rate at which red blood cells settle at the bottom of a tube in one hour, indicating inflammation" },
-      { type:"id", q:"What is the Westergren method?", a:"the standard method for measuring ESR using a Westergren tube" },
-      { type:"id", q:"What is a blood culture used for?", a:"to detect the presence of bacteria or fungi in the blood (bacteremia or septicemia)" },
-      { type:"id", q:"Which tube is drawn first when collecting blood cultures?", a:"blood culture bottle (aerobic first, then anaerobic)" },
-      { type:"id", q:"What is a lipid panel?", a:"a blood test measuring cholesterol and triglycerides, including total cholesterol, LDL, HDL, and triglycerides" },
-      { type:"id", q:"What preparation is required before a lipid panel?", a:"fasting for 9-12 hours before the test" },
       { type:"id", q:"What is the normal fasting blood glucose range?", a:"70 to 99 mg/dL" },
       { type:"id", q:"What does TSH stand for?", a:"thyroid-stimulating hormone" },
       { type:"id", q:"What is a urinalysis?", a:"a series of tests performed on a urine sample to detect various disorders such as urinary tract infections, kidney disease, and diabetes" },
@@ -697,15 +669,11 @@ const SECTIONS = [
   }
 ];
 
-// ═══════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════
 let activeQuestions = [];
 let currentIdx = 0;
 let userAnswers = [];
 let selectedSections = [0, 1, 2, 3];
 
-// populate counts
 SECTIONS.forEach((s, i) => {
   document.getElementById('count-' + i).textContent = s.questions.length + ' questions';
 });
@@ -713,7 +681,7 @@ SECTIONS.forEach((s, i) => {
 function toggleSection(el) {
   const idx = +el.dataset.section;
   if (selectedSections.includes(idx)) {
-    if (selectedSections.length === 1) return; // keep at least one
+    if (selectedSections.length === 1) return;
     selectedSections = selectedSections.filter(x => x !== idx);
     el.classList.remove('selected');
   } else {
@@ -749,10 +717,15 @@ function renderQuestion() {
   let html = '';
   if (q.type === 'id') {
     const val = userAnswers[currentIdx] || '';
+    // Show hint if multiple answers are accepted
+    const multiHint = Array.isArray(q.a)
+      ? `<div class="enum-hint">Any one correct answer is accepted.</div>`
+      : '';
     html = `
       <div class="question-card">
         <div class="question-label">Identification</div>
         <div class="question-text">${q.q}</div>
+        ${multiHint}
         <textarea class="answer-input" id="ans-input" rows="2" placeholder="Type your answer here...">${val}</textarea>
       </div>`;
   } else {
@@ -766,7 +739,7 @@ function renderQuestion() {
       <div class="question-card">
         <div class="question-label">Enumeration</div>
         <div class="question-text">${q.q}</div>
-        <div class="enum-hint">List ${q.count} items (order does not matter)</div>
+        <div class="enum-hint">List ${q.count} item/s (order does not matter)</div>
         <div class="enum-items">${items}</div>
       </div>`;
   }
@@ -802,16 +775,19 @@ function prevQ() {
   if (currentIdx > 0) { currentIdx--; renderQuestion(); }
 }
 
-// ─── GRADING ───
 function normalize(str) { return str.trim().toLowerCase().replace(/\s+/g, ' '); }
 
+// gradeId now handles both single string and array of accepted answers
 function gradeId(userAns, correctAns) {
   const u = normalize(userAns);
-  const c = normalize(correctAns);
-  if (u === c) return true;
-  // partial word match: all key words present
-  const cWords = c.split(/[\s,()\/]+/).filter(w => w.length > 3);
-  return cWords.every(w => u.includes(w));
+  // If correctAns is an array, check against each accepted answer
+  const candidates = Array.isArray(correctAns) ? correctAns : [correctAns];
+  return candidates.some(c => {
+    const cn = normalize(c);
+    if (u === cn) return true;
+    const cWords = cn.split(/[\s,()\/]+/).filter(w => w.length > 3);
+    return cWords.every(w => u.includes(w));
+  });
 }
 
 function gradeEnum(userArr, correctArr) {
@@ -878,14 +854,20 @@ function showReview() {
     const q = item.q;
     if (q.type === 'id') {
       const cls = item.correct ? 'correct' : 'wrong';
-      const tag = item.correct ? '<span class="tag-correct">✓ Correct</span>' : '<span class="tag-wrong">✗ Wrong</span>';
+      // Build accepted answers display for multi-answer questions
+      const isMulti = Array.isArray(q.a);
+      const correctDisplay = isMulti ? q.a.join(' / ') : q.a;
+      const multiAnswerNote = isMulti
+        ? `<div class="accepted-answers-note"><strong>✦ Accepted Answers</strong>${q.a.map(ans => `<div>• ${ans}</div>`).join('')}</div>`
+        : '';
       html += `<div class="review-card ${cls}">
         <div class="review-q-label">${cls === 'correct' ? '✓ Correct' : '✗ Incorrect'} · Q${i+1} · Identification</div>
         <div class="review-q-text">${q.q}</div>
         <div class="review-answer-row"><div class="review-answer-dot ${cls === 'correct' ? 'dot-correct' : 'dot-wrong'}"></div>
           <div class="review-answer-text"><strong>Your answer:</strong> ${item.userAns || '<em>no answer</em>'}</div></div>
         ${!item.correct ? `<div class="review-answer-row"><div class="review-answer-dot dot-correct"></div>
-          <div class="review-answer-text"><strong>Correct answer:</strong> ${q.a}</div></div>` : ''}
+          <div class="review-answer-text"><strong>Correct answer:</strong> ${correctDisplay}</div></div>` : ''}
+        ${multiAnswerNote}
       </div>`;
     } else {
       const normalizedCorrect = q.a.map(normalize);
@@ -911,11 +893,17 @@ function showReview() {
             ${!matched && q.a[j] ? `<div style="font-size:0.8rem;color:var(--green);margin-top:3px">Expected: ${q.a[j]}</div>` : ''}
           </div></div>`;
       }
+
+      const answerKeyItems = q.a.map((ans) => `<li>${ans}</li>`).join('');
       const cls = item.pts === item.total ? 'correct' : 'wrong';
       html += `<div class="review-card ${cls}">
         <div class="review-q-label">${item.pts === item.total ? '✓ Full Credit' : item.pts > 0 ? `~ Partial (${item.pts}/${item.total})` : '✗ Incorrect'} · Q${i+1} · Enumeration</div>
         <div class="review-q-text">${q.q}</div>
         <div class="enum-review-list">${itemsHtml}</div>
+        <div class="enum-answer-key">
+          <div class="enum-answer-key-title">✦ Complete Answer Key</div>
+          <ol>${answerKeyItems}</ol>
+        </div>
       </div>`;
     }
   });
